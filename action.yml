@@ -16,7 +16,7 @@ runs:
     - name: Create working directory
       shell: bash
       run: |
-        if [ ! -e curl_lib ]
+        if [ ! -e curl_lib ]; then
           mkdir curl_lib
         fi
     - name: Setup curl
