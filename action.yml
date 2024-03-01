@@ -14,6 +14,7 @@ runs:
         path: curl_lib
         key: curl-${{ runner.os }}-${{ inputs.curl_version }}
     - name: Create working directory
+      shell: bash
       run: |
         if [ ! -e curl_lib ]
           mkdir curl_lib
