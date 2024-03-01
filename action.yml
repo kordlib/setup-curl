@@ -1,0 +1,31 @@
+name: 'Setup curl'
+description: 'Installs a version of curl with websockets enabled'
+inputs:
+  curl_version:  # id of input
+    description: 'The version of curl which is used'
+    required: true
+    default: '8.5.0'
+runs:
+  using: "composite"
+  steps:
+    - name: Cache curl
+      uses: actions/cache@v4
+      with:
+        path: curl_lib
+        key: curl-${{ runner.os }}-${{ inputs.curl_version }}
+    - name: Setup curl
+      shell: bash
+      working-directory: curl_lib
+      run: |
+        if [ ! -e Makefile ]; then
+            curl -o curl.tgz https://curl.se/download/curl-${{ inputs.curl_version }}.tar.gz
+            tar xzvf curl.tgz --strip-components=1
+            rm curl.tgz
+            ./configure --with-openssl --enable-websockets
+        fi
+        if [ ! -e src/curl ]; then
+            make
+        fi
+        sudo make install
+        sudo cp -r /usr/local/lib/libcurl* /usr/lib64/
+        sudo cp -r /usr/local/include/curl/ /usr/include
