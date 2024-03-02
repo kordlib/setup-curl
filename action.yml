@@ -23,6 +23,7 @@ runs:
       shell: bash
       working-directory: curl_lib
       run: |
+        apt update && apt install libpsl-dev
         if [ ! -e Makefile ]; then
             curl -o curl.tgz https://curl.se/download/curl-${{ inputs.curl_version }}.tar.gz
             tar xzvf curl.tgz --strip-components=1
