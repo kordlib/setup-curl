@@ -4,7 +4,7 @@ inputs:
   curl_version:  # id of input
     description: 'The version of curl which is used'
     required: true
-    default: '8.8.0'
+    default: '8.9.1'
 runs:
   using: "composite"
   steps:
