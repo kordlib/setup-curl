@@ -9,7 +9,7 @@ runs:
   using: "composite"
   steps:
     - name: Cache curl
-      uses: actions/cache@v4
+      uses: actions/cache@v6
       with:
         path: curl_lib
         key: curl-${{ runner.os }}-${{ inputs.curl_version }}
